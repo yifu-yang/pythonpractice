@@ -1,4 +1,4 @@
-# pythonbractice
+# python practice
 
 >just practice
 
