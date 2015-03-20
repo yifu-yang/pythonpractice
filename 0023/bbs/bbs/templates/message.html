@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<tr><td>name:</td><td><input id="name" type="text"></td></tr>
+<tr><td>message:</td><td><input id="message" type="text"></td></tr>
+<tr><td><input type="button" id="submit" value="ok" /></td></tr>
+<table id="list">
+{% if list%}
+{% for item in list%}
+<tr><td>{{item.name}}</td><td>{{item.message}}</td></tr>
+{% endfor %}
+{% else%}
+<tr><td><p>no message</p></td><tr>
+{% endif %}
+</table>
+</body>
+<script type="text/javascript">
+$("#submit").on('click',function(e){
+    $.post('/addmessage/',
+            {'name':$('#name').val(),
+            'message':$('#message').val()},
+            function(data,status){
+                if(status=='success'){
+                    alert(data.tip);
+                }
+            }
+    );
+});
+    /*$(function(e){
+      $.post('/getmessagelist/',
+            {},
+            function(data,status){
+                if(status=='success'){
+                    str='';
+                    for(item in data){
+                        str+="<tr><td>"+data[item].name+":</td><td>"+data[item].message+"</td></tr>";
+                    }
+                    $("#list").html(str);
+                }
+            }
+    )
+    })*/
+</script>
+</html>
